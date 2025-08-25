@@ -1,0 +1,26 @@
+{
+  "name": "@arisris/app-www",
+  "version": "1.0",
+  "description": "A blog manager",
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "wrangler pages dev",
+    "clean": "echo 'Nothing to clean'",
+    "typegen": "wrangler types && svelte-kit sync"
+  },
+  "dependencies": {
+    "hono": "catalog:"
+  },
+  "devDependencies": {
+    "@arisris/tsconfig": "workspace:*",
+    "@sveltejs/adapter-cloudflare": "catalog:svelte-kit",
+    "@sveltejs/kit": "catalog:svelte-kit",
+    "@tailwindcss/vite": "catalog:svelte-kit",
+    "svelte": "catalog:svelte-kit",
+    "tailwindcss": "catalog:svelte-kit",
+    "vite": "catalog:",
+    "wrangler": "catalog:"
+  }
+}

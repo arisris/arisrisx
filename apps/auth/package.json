@@ -1,0 +1,21 @@
+{
+  "name": "@arisris/app-auth",
+  "version": "1.0",
+  "description": "A blog manager",
+  "main": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "bun --watch src/index.ts",
+    "build": "echo 'Nothing to build'",
+    "preview": "echo 'Nothing to preview'",
+    "clean": "echo 'Nothing to clean'",
+    "typegen": "echo 'Nothing to typegen'"
+  },
+  "dependencies": {
+    "hono": "catalog:",
+    "@auth/core": "^0.40.0"
+  },
+  "devDependencies": {
+    "@arisris/tsconfig": "workspace:*"
+  }
+}

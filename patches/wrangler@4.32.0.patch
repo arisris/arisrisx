@@ -1,0 +1,13 @@
+diff --git a/wrangler-dist/cli.js b/wrangler-dist/cli.js
+index ae7d84346400f7d494d49da0003610048a0c43a0..e41727b0d6c406d5839de3e61dc3acd73fafd3f5 100644
+--- a/wrangler-dist/cli.js
++++ b/wrangler-dist/cli.js
+@@ -66791,6 +66791,8 @@ var init_supports_color2 = __esm({
+ 
+ // src/wrangler-banner.ts
+ async function printWranglerBanner(performUpdateCheck = true) {
++  // force no update check patch
++  performUpdateCheck = false
+   let text = typeof WRANGLER_PRERELEASE_LABEL === "undefined" ? ` \u26C5\uFE0F wrangler ${version}` : ` \u26C5\uFE0F wrangler ${version} (${source_default.blue(WRANGLER_PRERELEASE_LABEL)})`;
+   let maybeNewVersion;
+   if (performUpdateCheck) {

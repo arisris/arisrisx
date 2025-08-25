@@ -1,0 +1,7 @@
+{
+  "name": "@arisris/tsconfig",
+  "version": "1.0",
+  "files": [
+    "tsconfig.base.json"
+  ]
+}

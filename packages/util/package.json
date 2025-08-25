@@ -1,0 +1,11 @@
+{
+  "name": "@arisris/util",
+  "version": "1.0",
+  "description": "A blog manager",
+  "type": "module",
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {
+    "@arisris/tsconfig": "workspace:*"
+  }
+}
