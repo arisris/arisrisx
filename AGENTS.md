@@ -4,7 +4,8 @@ This document provides guidance for AI coding agents to effectively contribute t
 
 ## About This Project
 
-This is a Bun-based monorepo for the website [arisris.com](https://arisris.com). The project is structured with applications in the `apps/` directory and shared packages in the `packages/` directory.
+This is a Bun-based monorepo for the website [arisris.com](https://arisris.com).
+The project is structured with applications in the `apps/` directory and shared packages in the `packages/` directory.
 
 ### Tech Stack
 
@@ -22,7 +23,7 @@ Bun typically installed in user bases home directory. `~/.bun/bin/bun`
 Be carefull to try to using `source ~/.bashrc` first before running bun command.
 If `bun` command still not found you may ask user to install it.
 
-1. **Install Bun:** If you don't have Bun installed, follow the [official installation instructions](https://bun.sh/docs/installation).
+1. **Install Bun:** If you don't have Bun installed, follow the [official installation instructions](https://bun.dev/docs/installation).
 2. **Clean Install:** Run the following command to perform a clean installation of all dependencies in the workspace:
    ```bash
    bun run clean
@@ -54,7 +55,7 @@ This lint & format is powered by biomejs
 ### Other
 
 - `bun run typegen`: Generates types for the project.
-- `bun run clean`: Deletes all `node_modules` and `bun.lockb` files and re-installs all dependencies.
+- `bun run clean`: Deletes all `node_modules` re-installs all dependencies.
 
 ## Package Management
 
