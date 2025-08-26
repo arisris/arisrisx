@@ -17,6 +17,11 @@ This is a Bun-based monorepo for the website [arisris.com](https://arisris.com).
 
 To set up the development environment, follow these steps:
 
+Be check `bun` is already installed.
+Bun typically installed in user bases home directory. `~/.bun/bin/bun`
+Be carefull to try to using `source ~/.bashrc` first before running bun command.
+If `bun` command still not found you may ask user to install it.
+
 1. **Install Bun:** If you don't have Bun installed, follow the [official installation instructions](https://bun.sh/docs/installation).
 2. **Clean Install:** Run the following command to perform a clean installation of all dependencies in the workspace:
    ```bash
@@ -39,9 +44,11 @@ The following scripts are available in the root `package.json` and can be run wi
 
 ### Code Quality
 
+This lint & format is powered by biomejs
+
 - `bun run lint`: Lints the entire workspace.
 - `bun run lint:fix`: Lints and automatically fixes issues in the entire workspace.
-- `bun run format`: Formats the entire workspace using Prettier.
+- `bun run format`: Formats the entire workspace using Biome.
 - `bun run format:fix`: Formats and automatically fixes formatting issues in the entire workspace.
 
 ### Other
