@@ -1,6 +1,6 @@
 {
   "name": "@arisris/app-www",
-  "version": "1.0",
+  "version": "1.0.0",
   "description": "A blog manager",
   "type": "module",
   "scripts": {
@@ -12,6 +12,7 @@
     "deploy": "echo 'Deploy is not supported yet'"
   },
   "dependencies": {
+    "cva": "npm:class-variance-authority",
     "hono": "catalog:",
     "zod": "^4.1.3"
   },

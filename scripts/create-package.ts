@@ -16,7 +16,7 @@ if (!packageName) {
   process.exit(1);
 }
 
-if (packageType !== "apps" && "packages") {
+if (packageType !== "apps" && packageType !== "packages") {
   console.error(
     "Error: Invalid package type specified with -t. Must be 'apps' or 'packages'.",
   );

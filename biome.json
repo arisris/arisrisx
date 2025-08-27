@@ -38,6 +38,9 @@
     }
   },
   "javascript": {
+    "linter": {
+      "enabled": true
+    },
     "formatter": {
       "quoteStyle": "double",
       "jsxQuoteStyle": "double"
