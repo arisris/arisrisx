@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - main
-    tags:
-      - release
 
 jobs:
   deploy:
@@ -26,7 +24,7 @@ jobs:
         run: bun run build
 
       - name: Deploy auth to workers
-        run: bun run --cwd apps/auth deploy
+        run: bun run --filter=@arisris/app-auth deploy
 
       - name: Deploy www to workers
-        run: bun run --cwd apps/www deploy
+        run: bun run --filter=@arisris/app-www deploy

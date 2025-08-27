@@ -65,7 +65,7 @@ bun run dev
 
 ### **3. Creating a New Package**
 
-To create a new shared utility or library:
+To create a new shared library:
 
 ```bash
 bun scripts/create-package.ts <package-name>
@@ -82,8 +82,8 @@ bun scripts/create-package.ts <app-name> -t apps
 To lint and format the entire workspace and automatically fix issues:
 
 ```bash
-bun run format:fix
-bun run lint:fix
+bun format:fix
+bun lint:fix
 ```
 
 ### **5. Releasing a New Version**
@@ -105,16 +105,10 @@ After running the script, you will still need to manually push the commit and ta
 
 ### **6. Cleaning the Project**
 
-To remove all build artifacts without deleting `node_modules`:
-
-```bash
-bun run clean:dist
-```
-
 To perform a full reset (removes `node_modules` and reinstalls):
 
 ```bash
-bun run clean
+bun clean
 ```
 
 -----
@@ -122,6 +116,6 @@ bun run clean
 ## 📜 Rules & Constraints
 
   - **Always use Bun**: This project is standardized on Bun. Do not use `npm`, `yarn`, or `pnpm`.
-  - **Follow Linting Rules**: Before finalizing any code changes, always run `bun run lint:fix` and `bun run format:fix`.
+  - **Follow Linting Rules**: Before finalizing any code changes, always run `bun lint:fix` and `bun format:fix`.
   - **Use a Single Command**: When possible, prefer using the root `package.json` scripts over running commands in individual workspaces.
   - **Check this Guide First**: Before performing any task, review the workflows in this document.
