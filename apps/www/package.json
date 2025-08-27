@@ -8,7 +8,8 @@
     "build": "vite build",
     "preview": "wrangler pages dev",
     "clean": "echo 'Nothing to clean'",
-    "typegen": "wrangler types && svelte-kit sync"
+    "typegen": "wrangler types && svelte-kit sync",
+    "deploy": "echo 'Deploy is not supported yet'"
   },
   "dependencies": {
     "hono": "catalog:",

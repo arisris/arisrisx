@@ -9,7 +9,8 @@
     "build": "echo 'Nothing to build'",
     "preview": "echo 'Nothing to preview'",
     "clean": "echo 'Nothing to clean'",
-    "typegen": "echo 'Nothing to typegen'"
+    "typegen": "echo 'Nothing to typegen'",
+    "deploy": "echo 'Deploy is not supported yet'"
   },
   "dependencies": {
     "hono": "catalog:",

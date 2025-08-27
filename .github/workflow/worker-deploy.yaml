@@ -18,3 +18,12 @@ jobs:
         
       - name: Typegen
         run: bun run typegen
+
+      - name: Build workspace
+        run: bun run build
+
+      - name: Deploy auth to workers
+        run: bun run --cwd apps/auth deploy
+
+      - name: Deploy www to workers
+        run: bun run --cwd apps/www deploy
