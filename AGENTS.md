@@ -17,16 +17,13 @@ The project is structured with applications in the `apps/` directory and shared 
 ## Getting Started
 
 To set up the development environment, follow these steps:
-
 Be check `bun` is already installed.
-Bun typically installed in user bases home directory. `~/.bun/bin/bun`
-Be carefull to try to using `source ~/.bashrc` first before running bun command.
-If `bun` command still not found you may ask user to install it.
 
 1. **Install Bun:** If you don't have Bun installed, follow the [official installation instructions](https://bun.dev/docs/installation).
 2. **Clean Install:** Run the following command to perform a clean installation of all dependencies in the workspace:
    ```bash
-   bun run clean
+   bun install
+   bun run typegen
    ```
 3. **Start Development Servers:** To start the development servers for all applications, run:
    ```bash
@@ -45,7 +42,7 @@ The following scripts are available in the root `package.json` and can be run wi
 
 ### Code Quality
 
-This lint & format is powered by biomejs
+This lint & format is powered by biomejs. follow [biome.json](./biome.json) configuration file.
 
 - `bun run lint`: Lints the entire workspace.
 - `bun run lint:fix`: Lints and automatically fixes issues in the entire workspace.
@@ -59,27 +56,43 @@ This lint & format is powered by biomejs
 
 ## Package Management
 
-- **Add a dependency to a specific app:**
+- **Add dependency:**
   ```bash
-  cd apps/<app_name>
-  bun add <package_name>
+  bun add --cwd <apps|packages>/<app_name> <package_name>
   ```
-- **Add a dev dependency to a specific app:**
+- **Add Dev dependency:**
   ```bash
-  cd apps/<app_name>
-  bun add -D <package_name>
+  bun add --cwd <apps|packages>/<app_name> -D <package_name>
+
+- **Remove dependency:**
+  ```bash
+  bun remove --cwd <apps|packages>/<app_name> <package_name>
   ```
 
 ## Package Descriptions
 
-### `apps/www`
+### `apps/`
 
-- **Purpose:** The main website for [arisris.com](https://arisris.com).
-- **Framework:** SvelteKit
-- **Description:** This package contains the frontend code for the main website.
+- **`www`**
 
-### `apps/auth`
+  - **Purpose:** The main website for [arisris.com](https://arisris.com).
+  - **Framework:** SvelteKit
+  - **Description:** This package contains the frontend code for the main website.
 
-- **Purpose:** Authentication service for [auth.arisris.com](https://auth.arisris.com).
-- **Framework:** Hono
-- **Description:** This package handles all user authentication and management.
+- **`auth`**
+
+  - **Purpose:** Authentication service for [auth.arisris.com](https://auth.arisris.com).
+  - **Framework:** Hono
+  - **Description:** This package handles all user authentication and management.
+
+### `packages/`
+
+- **`tsconfig`**
+  - **Porpuse:** Typescript configuration.
+  - **Description:** Any package must rely in this pkg.
+  
+
+- **`util`**
+
+  - **Porpose:** Utility package.
+  - **Description:** This package contains utility.

@@ -7,7 +7,7 @@
     "dev": "bun run -F @arisris/app-* dev",
     "build": "bun run -F @arisris/app-* build",
     "preview": "bun run -F @arisris/app-* preview",
-    "clean": "rm -rf node_modules && bun i && bun run -F @arisris/app-* clean && bun typegen",
+    "clean": "rm -rf node_modules && bun i && bun run -F @arisris/app-* clean",
     "typegen": "bun run -F @arisris/app-* typegen",
     "format": "bun --bun biome format",
     "format:fix": "bun --bun biome format --write",
