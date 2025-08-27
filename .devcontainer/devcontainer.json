@@ -1,0 +1,25 @@
+{
+  "name": "Alpine",
+  "image": "mcr.microsoft.com/devcontainers/base:bookworm",
+  "initializeCommand": "export BUN_INSTALL='$HOME/.bun'",
+  "onCreateCommand": "curl -fsSL https://bun.com/install | bash",
+  "postStartCommand": "bun clean",
+  "forwardPorts": [
+    3000,
+    5173
+  ],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "biomejs.biome",
+        "svelte.svelte-vscode",
+        "bradlc.vscode-tailwindcss"
+      ],
+      "settings": {
+        "editor.tabSize": 2,
+        "editor.fontSize": 11,
+        "files.autoSave": "off"
+      }
+    }
+  }
+}
