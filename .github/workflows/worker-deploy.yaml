@@ -8,7 +8,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    name: Deploy auth
+    name: Cloudflare Deploy
+    if: "contains(github.event.head_commit.message, 'deploy-to-cloudflare')"
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
