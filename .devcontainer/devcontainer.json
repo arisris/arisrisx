@@ -2,7 +2,7 @@
   "name": "Alpine",
   "image": "mcr.microsoft.com/devcontainers/base:bookworm",
   "initializeCommand": "export BUN_INSTALL='$HOME/.bun'",
-  "onCreateCommand": "curl -fsSL https://bun.com/install | bash",
+  "onCreateCommand": "sudo apt-get update && sudo apt-get install -y curl git git-lfs && curl -fsSL https://bun.com/install | bash",
   "postStartCommand": "bun clean",
   "forwardPorts": [
     3000,
