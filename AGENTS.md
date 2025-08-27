@@ -1,98 +1,127 @@
-# Gemini Agent Guide
+### `AGENTS.md`
 
-This document provides guidance for AI coding agents to effectively contribute to the `arisris.com` monorepo.
+# Agent Guide
 
-## About This Project
+**Version: 2.0**
 
-This is a Bun-based monorepo for the website [arisris.com](https://arisris.com).
-The project is structured with applications in the `apps/` directory and shared packages in the `packages/` directory.
+This document provides structured guidance for AI agents to effectively contribute to the `arisris.com` monorepo.
 
-### Tech Stack
+---
 
-- **Runtime & Toolkit:** [Bun](https://bun.sh/)
-- **Web Framework (www):** [SvelteKit](https://kit.svelte.dev/)
-- **Authentication (auth):** [Hono](https://hono.dev/)
-- **Language:** [TypeScript](https://www.typescriptlang.org/)
+## 🎯 Primary Goal
 
-## Getting Started
+Your primary goal is to assist in the development, maintenance, and deployment of the `arisris.com` monorepo by executing tasks as instructed, automating workflows, and ensuring code quality.
 
-To set up the development environment, follow these steps:
-Be check `bun` is already installed.
+---
 
-1. **Install Bun:** If you don't have Bun installed, follow the [official installation instructions](https://bun.dev/docs/installation).
-2. **Clean Install:** Run the following command to perform a clean installation of all dependencies in the workspace:
-   ```bash
-   bun install
-   bun run typegen
-   ```
-3. **Start Development Servers:** To start the development servers for all applications, run:
-   ```bash
-   bun run dev
-   ```
+## 🗺️ Project Overview
 
-## Available Scripts
+-   **Description**: A Bun-based monorepo for the website [arisris.com](https://arisris.com).
+-   **Structure**:
+    -   `apps/`: Contains deployable applications.
+    -   `packages/`: Houses shared libraries and utilities.
+    -   `scripts/`: Contains automation and management scripts.
+-   **Tech Stack**:
+    -   **Runtime**: Bun
+    -   **Web Framework (`www`)**: SvelteKit
+    -   **Authentication (`auth`)**: Hono
+    -   **Language**: TypeScript
 
-The following scripts are available in the root `package.json` and can be run with `bun run <script_name>`.
+---
 
-### Development
+## 🗂️ Key Files Manifest
 
-- `bun run dev`: Starts the development servers for all applications.
-- `bun run build`: Builds all applications for production.
-- `bun run preview`: Previews the production build of the applications.
+-   **`package.json`**: (Root) Defines all workspaces and root-level scripts.
+-   **`AGENTS.md`**: (Root) This guide. Your primary source of instructions.
+-   **`biome.json`**: (Root) Configuration for linting and formatting.
+-   **`apps/www/svelte.config.js`**: SvelteKit configuration for the main website.
+-   **`apps/auth/src/index.ts`**: Main entry point for the Hono authentication service.
+-   **`packages/tsconfig/tsconfig.base.json`**: The base TypeScript configuration for all packages.
+-   **`scripts/`**: Directory containing all automation scripts (`create-package.ts`, `set-version.ts`, etc.).
 
-### Code Quality
+---
 
-This lint & format is powered by biomejs. follow [biome.json](./biome.json) configuration file.
+## ⚙️ Standard Workflows
 
-- `bun run lint`: Lints the entire workspace.
-- `bun run lint:fix`: Lints and automatically fixes issues in the entire workspace.
-- `bun run format`: Formats the entire workspace using Biome.
-- `bun run format:fix`: Formats and automatically fixes formatting issues in the entire workspace.
+Execute the following workflows using the provided commands.
 
-### Other
+### **1. Initial Project Setup**
 
-- `bun run typegen`: Generates types for the project.
-- `bun run clean`: Deletes all `node_modules` re-installs all dependencies.
+To set up the development environment from a clean state:
 
-## Package Management
+```bash
+bun install
+````
 
-- **Add dependency:**
-  ```bash
-  bun add --cwd <apps|packages>/<app_name> <package_name>
-  ```
-- **Add Dev dependency:**
-  ```bash
-  bun add --cwd <apps|packages>/<app_name> -D <package_name>
+The `postinstall` script will automatically run `bun run typegen`.
 
-- **Remove dependency:**
-  ```bash
-  bun remove --cwd <apps|packages>/<app_name> <package_name>
-  ```
+### **2. Development**
 
-## Package Descriptions
+To start the development servers for all applications:
 
-### `apps/`
+```bash
+bun run dev
+```
 
-- **`www`**
+### **3. Creating a New Package**
 
-  - **Purpose:** The main website for [arisris.com](https://arisris.com).
-  - **Framework:** SvelteKit
-  - **Description:** This package contains the frontend code for the main website.
+To create a new shared utility or library:
 
-- **`auth`**
+```bash
+bun scripts/create-package.ts <package-name>
+```
 
-  - **Purpose:** Authentication service for [auth.arisris.com](https://auth.arisris.com).
-  - **Framework:** Hono
-  - **Description:** This package handles all user authentication and management.
+To create a new application:
 
-### `packages/`
+```bash
+bun scripts/create-package.ts <app-name> -t apps
+```
 
-- **`tsconfig`**
-  - **Porpuse:** Typescript configuration.
-  - **Description:** Any package must rely in this pkg.
-  
+### **4. Code Quality Checks**
 
-- **`util`**
+To lint and format the entire workspace and automatically fix issues:
 
-  - **Porpose:** Utility package.
-  - **Description:** This package contains utility.
+```bash
+bun run format:fix
+bun run lint:fix
+```
+
+### **5. Releasing a New Version**
+
+To bump the version number, commit, and tag a new release:
+
+```bash
+# For a patch release (e.g., 1.0.0 -> 1.0.1)
+bun scripts/set-version.ts patch
+
+# For a minor release (e.g., 1.0.1 -> 1.1.0)
+bun scripts/set-version.ts minor
+
+# For a major release (e.g., 1.1.0 -> 2.0.0)
+bun scripts/set-version.ts major
+```
+
+After running the script, you will still need to manually push the commit and tag.
+
+### **6. Cleaning the Project**
+
+To remove all build artifacts without deleting `node_modules`:
+
+```bash
+bun run clean:dist
+```
+
+To perform a full reset (removes `node_modules` and reinstalls):
+
+```bash
+bun run clean
+```
+
+-----
+
+## 📜 Rules & Constraints
+
+  - **Always use Bun**: This project is standardized on Bun. Do not use `npm`, `yarn`, or `pnpm`.
+  - **Follow Linting Rules**: Before finalizing any code changes, always run `bun run lint:fix` and `bun run format:fix`.
+  - **Use a Single Command**: When possible, prefer using the root `package.json` scripts over running commands in individual workspaces.
+  - **Check this Guide First**: Before performing any task, review the workflows in this document.

@@ -11,7 +11,8 @@
     "typegen": "wrangler types && svelte-kit sync"
   },
   "dependencies": {
-    "hono": "catalog:"
+    "hono": "catalog:",
+    "zod": "^4.1.3"
   },
   "devDependencies": {
     "@arisris/tsconfig": "workspace:*",

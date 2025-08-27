@@ -1,40 +1,76 @@
-import { file, Glob } from "bun";
 import { join } from "node:path";
+import { file, Glob } from "bun";
 
-// Get the new version from the command-line arguments.
-const newVersion = process.argv[2];
+type IncrementType = "major" | "minor" | "patch";
 
-// Exit if no version number is provided.
-if (!newVersion) {
-  console.error("Error: Please provide a new version number as an argument.");
-  console.log("Usage: bun <script_name>.ts <new_version>");
+// --- Argument Parsing ---
+const incrementType = (process.argv[2] as IncrementType) || "patch";
+
+if (!["major", "minor", "patch"].includes(incrementType)) {
+  console.error(
+    "Error: Invalid increment type. Please use 'major', 'minor', or 'patch'.",
+  );
+  console.log("Usage: bun scripts/set-version.ts [major|minor|patch]");
   process.exit(1);
 }
 
-console.log(`Updating all package versions to: ${newVersion}...`);
+// --- Version Calculation ---
+async function getNextVersion(): Promise<string> {
+  const rootPackageJsonPath = join(process.cwd(), "package.json");
+  const pkg = await file(rootPackageJsonPath).json();
+  const currentVersion = pkg.version || "0.0.0";
 
-// Asynchronously iterate over each file found by the glob.
-for await (const filename of new Glob("{apps,packages}/**/package.json").scan({
-  cwd: process.cwd(),
-})) {
-  const dest = join(process.cwd(), filename);
+  let [major, minor, patch] = currentVersion.split(".").map(Number);
+
+  switch (incrementType) {
+    case "major":
+      major++;
+      minor = 0;
+      patch = 0;
+      break;
+    case "minor":
+      minor++;
+      patch = 0;
+      break;
+    case "patch":
+      patch++;
+      break;
+  }
+  return `${major}.${minor}.${patch}`;
+}
+
+// --- File Update Logic ---
+async function updatePackageVersion(filePath: string, newVersion: string) {
   try {
-    // Read the package.json file and parse it as a JavaScript object.
-    const pkgFile = file(dest);
+    const pkgFile = file(filePath);
     const pkgContent = await pkgFile.json();
-
-    // Update the version property.
     pkgContent.version = newVersion;
-
-    // Stringify the updated object with 2-space indentation to maintain formatting
-    // and write it back to the file. Appending a newline is a standard practice.
-    await Bun.write(dest, JSON.stringify(pkgContent, null, 2) + "\n");
-
-    console.log(`✅ Updated ${pkgContent.name}`);
+    await Bun.write(filePath, `${JSON.stringify(pkgContent, null, 2)}\n`);
+    console.log(`✅ Updated ${pkgContent.name} to ${newVersion}`);
   } catch (e) {
-    // Log an error if a file cannot be processed.
-    console.error(`❌ Failed to update ${filename}:`, e);
+    console.error(`❌ Failed to update ${filePath}:`, e);
   }
 }
 
-console.log("\nVersion update complete! ✨");
+// --- Main Execution ---
+async function main() {
+  const newVersion = await getNextVersion();
+  console.log(
+    `🚀 Bumping version from current to ${newVersion} (${incrementType})...`,
+  );
+
+  const glob = new Glob("{apps,packages}/**/package.json");
+  for await (const filename of glob.scan({
+    cwd: process.cwd(),
+    absolute: true,
+  })) {
+    await updatePackageVersion(filename, newVersion);
+  }
+
+  // Also update the root package.json
+  await updatePackageVersion(join(process.cwd(), "package.json"), newVersion);
+
+  console.log("\n✨ Version update complete!");
+}
+
+main();

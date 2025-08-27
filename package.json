@@ -1,18 +1,23 @@
 {
   "name": "arisris",
-  "version": "1.0",
+  "private": true,
+  "version": "1.0.0",
   "description": "A blog manager",
   "type": "module",
   "scripts": {
+    "postinstall": "bun run typegen",
     "dev": "bun run -F @arisris/app-* dev",
     "build": "bun run -F @arisris/app-* build",
     "preview": "bun run -F @arisris/app-* preview",
-    "clean": "rm -rf node_modules && bun i && bun run -F @arisris/app-* clean",
-    "typegen": "bun run -F @arisris/app-* typegen",
+    "clean": "rm -rf node_modules && bun i",
+    "clean:dist": "bun scripts/clean-dist.ts",
     "format": "bun --bun biome format",
     "format:fix": "bun --bun biome format --write",
     "lint": "bun --bun biome lint",
-    "lint:fix": "bun --bun biome lint --fix"
+    "lint:fix": "bun --bun biome lint --fix",
+    "typegen": "bun run -F '@arisris/app-*' typegen",
+    "pkg:create": "bun scripts/create-package.ts",
+    "pkg:set-version": "bun scripts/set-version.ts"
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.2",
